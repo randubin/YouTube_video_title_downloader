@@ -1,24 +1,15 @@
-# YouTube_video_title_downloader
-This is a windows  python+ selenium +chromedriver project.
-The purpose of the project is to download YouTbe encrypted network traffic of Dynamice Adaptive Streaming over HTTP (DASH) videos.
-With the help of this downloader we can create a training and testing set in order to classify YouTube video titles.
-Please note that the code assume that Selenium and chrome driver are already installed (pease specify the location in the global section). The default profile has ad-blocking abilities (if you don't want to catch advertisment as well).
+# I Know What You Saw Last Minute - Encrypted HTTP Adaptive Video Streaming Title Classification
+paper link: https://arxiv.org/abs/1602.00490
+The video titles used in this study are popular YouTube videos from different categories such as news, sports, nature, video action trailers, and GoPro videos. In this study we decided to use the Chrome browser since it is the most popular browser on the market and its popularity is growing. We used the default auto mode of the YouTube player (the player decides which quality representation to download based on estimation of the client network conditions). We used the Selenium web automation tool with ChromeDriver for the crawler, so it will simulate a user video download in exactly the same
+manner a normal user behaves. We used Ad-block Plus to eliminate advertisements only in the training datasets. This work assumes that video advertisement exists in the network in real scenarios. We do not assume that the advertisement can be distinguished from the viewed video in the encrypted network traffic level. We found that the video advertisement is distributed in different network flows and the video title download is distributed by several parallel network flows. Therefore, when testing unknown titles (titles that are not in the training titles) we do not filter out the video advertisement. Our algorithms classify each flow separately and we do not assume any prior knowledge about how many different flows exist per download.
+ 
+For this, we collected a dataset that contains 10,000 YouTube streams (that were downloaded via a real-world Internet connection during a period of a month over different real-world network conditions) of 100 video titles (100 streams per video title). As it is not reasonable that a group of people will watch only the above “target” video titles, we added other 2,000 video titles (5,000 streams) which are not included in the “target” video titles set. These titles are used as the unknown titles in the evaluation.
 
-The crawler maintains the regular user download behavior and was designed to work with YouTube Flash or HTML5 versions in “Auto” quality representation mode. 
-The dataset contains 10 subsets:
-1.	Main dataset: 100 titles with 100 different downloads per title. Each title is divided in to Train (90%) and Test (10%).
-2.	Network Added Delay 100 [ms]: 10 titles from the dataset (1)  list each has  10 different copies that we added them a fixed additional delay.
-3.	Network Added Delay 300 [ms]: 10 titles from the dataset (1)  list each has  10 different copies that we added them a fixed additional delay.
-4.	Network Added Delay 600 [ms]: 10 titles from the dataset (1)  list each has  10 different copies that we added them a fixed additional delay.
-5.	Network Added Delay 900 [ms]: 10 titles from the dataset (1)  list each has  10 different copies that we added them a fixed additional delay.
-6.	Network Added Packet Loss 1 [%]: 10 titles from the dataset (1)  list each has  10 different copies that we added them a fixed additional packet loss.
-7.	Network Added Packet Loss 3 [%]: 10 titles from the dataset (1)  list each has  10 different copies that we added them a fixed additional packet loss.
-8.	Network Added Packet Loss 6 [%]: 10 titles from the dataset (1)  list each has  10 different copies that we added them a fixed additional packet loss.
-9.	Network Added Packet Loss 9 [%]: 10 titles from the dataset (1)  list each has  10 different copies that we added them a fixed additional packet loss.
-10.	Titles which are not found in the  Main Dataset list (Train set): 30 video titles each has a single copy download. This dataset does not contain the same titles as the other sets.
+In the following we give the pcaps files of all the video title streams (different download time and network link) as regular download, with delay and with packet lost.
+
+
 Dataset link: http://www.cse.bgu.ac.il/title_fingerprinting/
 Dataset Crawler Available At: https://github.com/randubin/YouTube_video_title_downloader
-Please note that the duration and the link for each title are ready to download in the crawler code.
 For any questions please contact:
 dubinr@bgu.post.ac.il
 
